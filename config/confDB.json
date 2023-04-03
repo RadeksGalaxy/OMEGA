@@ -1,7 +1,7 @@
 {
-  "host":"0.tcp.eu.ngrok.io",
+  "host":"5.tcp.eu.ngrok.io",
   "user":"root",
   "password":"student",
   "database":"db_autoservis",
-  "port": 12144
+  "port": 15938
 }

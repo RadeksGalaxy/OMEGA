@@ -84,5 +84,6 @@ class PrihlasZam:
             raise PrihlaseniError('Špatné uživatelské jméno')
         if sheslo:
             raise PrihlaseniError('Špatné heslo')
+        print('ahoj')
 
 

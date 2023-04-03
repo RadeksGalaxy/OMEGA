@@ -71,11 +71,14 @@ class Ui_MainWindow(object):
         self.gridLayout.addLayout(self.horizontalLayout_7, 4, 0, 1, 1)
         self.tabulka = QtWidgets.QTableWidget(parent=self.centralwidget)
         self.tabulka.setObjectName("tabulka")
-        self.tabulka.setColumnCount(len(self.obj[0]))
-        for i in range(0 , len(self.obj[0])):
-            item = QtWidgets.QTableWidgetItem()
-            self.tabulka.setHorizontalHeaderItem(i, item)
-        self.tabulka.setRowCount(0)
+        if len(self.obj) != 0:
+            self.tabulka.setColumnCount(len(self.obj[0]))
+            for i in range(0 , len(self.obj[0])):
+                item = QtWidgets.QTableWidgetItem()
+                self.tabulka.setHorizontalHeaderItem(i, item)
+            self.tabulka.setRowCount(0)
+        else:
+            self.tabulka.setColumnCount(0)
         self.obnovit()
         self.gridLayout.addWidget(self.tabulka, 3, 0, 1, 1)
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
@@ -157,11 +160,11 @@ class Ui_MainWindow(object):
             for i in self.obj:
                 i[4] = str(self.typy[i[4]])
 
-        self.tabulka.setRowCount(0)
-        for x,y in enumerate(self.obj):
-            self.tabulka.insertRow(x)
-            for j,k in enumerate(y):
-                self.tabulka.setItem(x, j, QtWidgets.QTableWidgetItem(str(k)))
+            self.tabulka.setRowCount(0)
+            for x,y in enumerate(self.obj):
+                self.tabulka.insertRow(x)
+                for j,k in enumerate(y):
+                    self.tabulka.setItem(x, j, QtWidgets.QTableWidgetItem(str(k)))
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -176,10 +179,12 @@ class Ui_MainWindow(object):
             self.comboMode.setItemText(self.modely.index(i)+1, _translate("MainWindow", str(i)))
         for i in self.typy:
             self.comboTyp.setItemText(self.typy.index(i), _translate("MainWindow", str(i)))
-        for i in self.colmn:
-            item = self.tabulka.horizontalHeaderItem(self.colmn.index(i))
-            item.setText(_translate("MainWindow", str(i)))
-
+        if len(self.obj) != 0:
+            for i in self.colmn:
+                item = self.tabulka.horizontalHeaderItem(self.colmn.index(i))
+                item.setText(_translate("MainWindow", str(i)))
+        else:
+            pass
 
 def zobrazHlavniMenu(object=object, auservis=None):
     object.MainWindow = QtWidgets.QMainWindow()

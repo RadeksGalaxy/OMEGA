@@ -99,7 +99,7 @@ class Ui_MainWindow(object):
             self.okno.close()
         except prihlaseni.PrihlaseniError as e:
             self.chybHlaska.setText(str(e))
-        except Exception:
+        except Exception as e:
             pass
 
     def retranslateUi(self, MainWindow):

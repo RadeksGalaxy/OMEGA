@@ -14,8 +14,21 @@
    <string>prihlaseni</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QFormLayout" name="formLayout_2">
+   <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
+     <spacer name="horizontalSpacer">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="0" column="1">
      <layout class="QFormLayout" name="formLayout">
       <item row="1" column="0" colspan="2">
        <widget class="QLabel" name="label_2">
@@ -63,13 +76,6 @@
           <width>250</width>
           <height>0</height>
          </size>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="1">
-       <widget class="QLabel" name="chybHlaska">
-        <property name="text">
-         <string/>
         </property>
        </widget>
       </item>
@@ -145,7 +151,30 @@
         </property>
        </spacer>
       </item>
+      <item row="5" column="0" colspan="2">
+       <widget class="QLabel" name="chybHlaska">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
      </layout>
+    </item>
+    <item row="0" column="2">
+     <spacer name="horizontalSpacer_2">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
     </item>
    </layout>
   </widget>
@@ -155,7 +184,7 @@
      <x>0</x>
      <y>0</y>
      <width>960</width>
-     <height>24</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>
