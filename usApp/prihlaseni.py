@@ -1,7 +1,7 @@
 import hashlib
 import re
-from conDB import connection
-from usApp import ochrana
+from conDB import connection, ochrana
+
 
 class SpatnePrihlaseniError(Exception):
     def __init__(self, mes):

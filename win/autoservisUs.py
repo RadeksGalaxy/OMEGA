@@ -1,3 +1,4 @@
+import pandas as pd
 from PyQt6 import QtWidgets
 from PyQt6 import QtCore
 from PyQt6 import QtGui
@@ -11,21 +12,25 @@ from conDB import metody as metodyDB, connection
 from win.autoservisUsII import Ui_pomoc
 from usApp import autoservis
 import datetime
+from vendor.tableModel import TableModel
+from win import odpovedReakce
 from usApp import vytvoreniObjednavky
 
 
 class Ui_autoservisUs(Ui_pomoc, object):
     def setupUi(self, autoservisUs, email, autoser):
         autoservisUs.setObjectName("autoservisUs")
-        autoservisUs.resize(960, 540)
+        autoservisUs.resize(980, 680)
         self.autoservisUS = autoservisUs
         self.auta = metodyDB.nacteniAut()
         self.email = email
         self.cas = datetime.datetime.now()
+        print(autoser)
         if len(autoser) == 0:
             self.autoservis = autoservis.Autoservisy.vypisAutoservis()
         else:
             self.autoservis = autoser
+
         self.centralwidget = QtWidgets.QWidget(parent=autoservisUs)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
@@ -193,18 +198,20 @@ class Ui_autoservisUs(Ui_pomoc, object):
         self.horizontalLayout_8.addWidget(self.btnVyhledat)
         spacerItem12 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_8.addItem(spacerItem12)
-        self.gridLayout_2.addLayout(self.horizontalLayout_8, 4, 1, 1, 2)
+        self.gridLayout_2.addLayout(self.horizontalLayout_8, 5, 1, 1, 2)
         spacerItem13 = QtWidgets.QSpacerItem(20, 10, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Fixed)
         self.gridLayout_2.addItem(spacerItem13, 0, 1, 1, 2)
         spacerItem14 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Minimum)
         self.gridLayout_2.addItem(spacerItem14, 1, 0, 1, 1)
-        self.tabulka = QtWidgets.QTableWidget(parent=self.tab_2)
+        self.tabulka = QtWidgets.QTableView(parent=self.tab_2)
         self.tabulka.setObjectName("tabulka")
-        self.tabulka.setColumnCount(0)
-        self.tabulka.setRowCount(0)
         self.gridLayout_2.addWidget(self.tabulka, 3, 1, 1, 2)
         spacerItem15 = QtWidgets.QSpacerItem(20, 10, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Fixed)
         self.gridLayout_2.addItem(spacerItem15, 2, 1, 1, 2)
+        self.chybHlaska2 = QtWidgets.QLabel(parent=self.tab_2)
+        self.chybHlaska2.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.chybHlaska2.setObjectName("chybHlaska2")
+        self.gridLayout_2.addWidget(self.chybHlaska2, 4, 2, 1, 1)
         self.horizontalLayout_9 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_9.setObjectName("horizontalLayout_9")
         spacerItem16 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Maximum, QtWidgets.QSizePolicy.Policy.Minimum)
@@ -255,9 +262,14 @@ class Ui_autoservisUs(Ui_pomoc, object):
         self.btnUs.clicked.connect(lambda : self.ui_uzivatel(email))
         self.btnAutoservisy.clicked.connect(self.zobrazAutoser)
         self.btnOdeslat.clicked.connect(self.akceOdeslani)
+        self.btnVyhledat.clicked.connect(self.hledatAkce)
+        self.btnRefresh.clicked.connect(self.obnovaAkce)
+        self.obnovaAkce()
         self.retranslateUi(autoservisUs, email)
         self.tabWidget.setCurrentIndex(0)
+
         QtCore.QMetaObject.connectSlotsByName(autoservisUs)
+
 
 
 def zobrazHlavniMenu(object : object, email, autoservisy):
@@ -265,13 +277,3 @@ def zobrazHlavniMenu(object : object, email, autoservisy):
     object.ui = Ui_autoservisUs()
     object.ui.setupUi(object.autoservisUs, email, autoservisy)
     object.autoservisUs.show()
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    autoservisUs = QtWidgets.QMainWindow()
-    ui = Ui_autoservisUs()
-    ui.setupUi(autoservisUs, 'student@spsejecna.cz', [])
-    autoservisUs.show()
-    sys.exit(app.exec())

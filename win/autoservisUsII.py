@@ -1,3 +1,4 @@
+import pandas as pd
 from PyQt6.QtWidgets import QMessageBox
 from PyQt6.uic.properties import QtCore
 from PyQt6 import QtCore
@@ -5,7 +6,8 @@ from PyQt6.QtCore import QSize
 from PyQt6.QtGui import QIcon
 
 from usApp import vytvoreniObjednavky
-from win import prihlaseni
+from vendor.tableModel import TableModel
+from win import prihlaseni, odpovedReakce
 from win import uzivatel
 from conDB import connection
 from win import seznamAutoservisu
@@ -88,6 +90,18 @@ class Ui_pomoc:
                 try:
                     obj.vlozeni(con,self.email)
                     self.chybHlaska.setText('Odesláno')
+                    self.poznamka.setText('')
+                    self.najeteKm.setValue(0)
+                    self.rokVyroby.setValue(2000)
+                    self.den.setValue(self.cas.day)
+                    self.mesic.setValue(self.cas.month)
+                    self.horizontalLayout_3.addWidget(self.rok)
+                    if self.rbtnServis.isChecked():
+                        self.rbtnServis.setCheckable(False)
+                    elif self.rbtnOprava.isChecked():
+                        self.rbtnOprava.setCheckable(False)
+                    else:
+                        self.rbtnBouracka.setCheckable(False)
                 except metodyDB.ProblemDB as e:
                     self.chybHlaska.setText(str(e))
                 except Exception:
@@ -100,3 +114,34 @@ class Ui_pomoc:
             self.chybHlaska.setText(str(e))
         except Exception:
             pass
+
+    def hledatAkce(self):
+        je = False
+        zodpovezeno = True
+        for i in self.odpovedi:
+            if i[0] == self.idVyhledat.value():
+                je = True
+                if i[6] != '⏳':
+                    zodpovezeno = False
+        self.chybHlaska2.setText('')
+        if je and zodpovezeno:
+            try:
+                odpovedReakce.zobrazOdpovedId(self, self.idVyhledat.value())
+            except Exception as e:
+                self.chybHlaska2.setText(str(e))
+        elif je and zodpovezeno == False:
+            self.chybHlaska2.setText('Již byla odeslána odpověď')
+        else:
+            self.chybHlaska2.setText('Tato objednavak neexistuje')
+
+    def obnovaAkce(self):
+        c = connection.Connection()
+        self.odpovedi = metodyDB.getOdpovediUpravene(c.con())
+        index = []
+        for i in range(1, len(self.odpovedi)+1):
+            index.append(i)
+        od = pd.DataFrame(
+            self.odpovedi
+        , columns=['objednavka_id','typ','datum', 'cas', 'cas_do', 'delka', 'proces'], index=index)
+        self.model = TableModel(od)
+        self.tabulka.setModel(self.model)

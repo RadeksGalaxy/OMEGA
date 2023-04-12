@@ -1,7 +1,6 @@
 import hashlib
+from conDB import connection, ochrana, metody
 import re
-from conDB import connection
-from usApp import ochrana
 
 class PrihlaseniError(Exception):
     def __init__(self, mes):
@@ -50,6 +49,15 @@ class PrihlasZam:
         cursor.close()
         return myresult
 
+    def pridejZam(self):
+        c = connection.Connection()
+        con = c.con()
+        cursor = con.cursor()
+        sql = "INSERT INTO zam (autoser_id, nazev, heslo) VALUES (%s, %s, %s)"
+        val = (self.autoservis, self.id, self.heslo)
+        cursor.execute(sql, val)
+        c.commit()
+
     @staticmethod
     def prihlasitSe(autoser ,id, heslo):
         p = PrihlasZam()
@@ -60,6 +68,8 @@ class PrihlasZam:
             raise PrihlaseniError('Zadejte us jmeno')
         if len(heslo) == 0:
             raise PrihlaseniError('Zadejte heslo')
+        if len(heslo) > 80:
+            raise PrihlaseniError('Dlouhe heslo')
         p.autoservis = autoser
         p.id = id
         p.heslo = heslo
@@ -84,6 +94,31 @@ class PrihlasZam:
             raise PrihlaseniError('Špatné uživatelské jméno')
         if sheslo:
             raise PrihlaseniError('Špatné heslo')
-        print('ahoj')
 
+    @staticmethod
+    def registrace(autoS, jmeno, heslo, hesloP, con):
+        p = PrihlasZam()
+        usjmenoRE = r'^[a-zA-Z]{3,20}$'
+        hesloRE = r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,40}$'
 
+        if not re.match(usjmenoRE, jmeno):
+            raise PrihlaseniError('Uzivatelske jmeno nesplnuje podminky: delka 3 - 20 znaku | pouze pismena')
+        if not re.match(hesloRE, heslo):
+            raise PrihlaseniError('Heslo nesplnuje podminky: delka 5 - 40 | musi obsahovat cislice a pismena')
+        if heslo == jmeno:
+            raise PrihlaseniError('Heslo nesmí být stejné jako jméno')
+        if heslo != hesloP:
+            raise PrihlaseniError('Hesla nejsou stejna')
+        if ochrana.sql_injection(jmeno) or ochrana.sql_injection(heslo) or ochrana.sql_injection(hesloP):
+            raise PrihlaseniError('Tento input je zakazan')
+
+        zamestanaci = metody.getZamJmeno(con, int(autoS))
+        for i in zamestanaci:
+            if i[0] == jmeno:
+                raise PrihlaseniError('Toto usjmeno již existuje')
+
+        p.autoservis = autoS
+        p.id = jmeno
+        p.heslo = heslo
+        p.hashPass()
+        p.pridejZam()

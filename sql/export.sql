@@ -67,13 +67,6 @@ create table objednavky
 );
 
 
-
-
-
-
-
-
-
 create table auto
 (
     id    int auto_increment
@@ -135,4 +128,20 @@ create table zam
     heslo      varchar(255) null,
     constraint autoser_fk
         foreign key (autoser_id) references autoservisy (id)
+);
+
+
+create or replace table odpoved
+(
+	id int auto_increment
+		primary key,
+	obj_id int null,
+	datum date null,
+	cas time null,
+	delka varchar(20) null,
+	poz varchar(1024) null,
+	odpoved int null comment '1=potvrzene || 2=zruseno',
+	casPred time null comment 'cas zacatku servisu',
+	constraint obj_fk
+		foreign key (obj_id) references db_autoservis.objednavky (id)
 );

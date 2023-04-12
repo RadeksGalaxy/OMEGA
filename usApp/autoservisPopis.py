@@ -6,6 +6,23 @@ from conDB import metody
 
 class AutoservisPopis (autoservis.Autoservisy):
     def __init__(self, globalId=None, nazev=None,mesto=None,ulice=None,psc=None,prodejAut=None, servisAut=None,email=None,url=None,logo=None, seznamTypu=list, seznamOtevreni=dict,seznamKontaktu=dict, stav=None):
+        '''
+        rozsirujici trida pro autoservisu, ktera je pouzita pro prehled autoservisu pro uzivatele
+        :param globalId: globalni ID pro CZ
+        :param nazev: nazev AS
+        :param mesto: mesto sidliciho servisu
+        :param ulice: ulice AS
+        :param psc: postovni smerovaci cislo AS
+        :param prodejAut: 1=pobocka prodava auta 0=neprodava
+        :param servisAut: 1=pobocka ma autorizovany servis 0=nema
+        :param email: email na AS
+        :param url: url adresa na web AS
+        :param logo: url adresa loga AS
+        :param seznamTypu: seznam vsech moznych pobocek na adrese
+        :param seznamOtevreni: seznam oteviraci doby dle pobocky
+        :param seznamKontaktu: seznam kontaktu pro urcite pobocky
+        :param stav: stav zda v ten moment je AS otevren nebo ma zavreno
+        '''
         super().__init__(globalId,nazev,mesto,ulice,psc,prodejAut,servisAut,email,url,logo)
         self.seznamTypu = seznamTypu
         self.seznamOtevreni = seznamOtevreni
@@ -45,6 +62,11 @@ class AutoservisPopis (autoservis.Autoservisy):
         self._stav = value
 
     def pridejTyp(self, value):
+        '''
+        metoda pro pridani typu AS
+        :param value: typ AS
+        :return: pridani do listu
+        '''
         a = self.seznamTypu
         b = []
         if type(a) == list:

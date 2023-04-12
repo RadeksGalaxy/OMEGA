@@ -1,12 +1,12 @@
 import json
 import mysql.connector
 
-'''
-trida pro pripojeni do DB podle architektury singleton
-'''
 class Connection:
     def __init__(self):
-        with open("../config/confDB.json", "r") as f:
+        '''
+        trida pro pripojeni do DB podle architektury singleton
+        '''
+        with open("../OMEGA/config/confDB.json", "r") as f:
             conf = json.load(f)
         if len(conf["host"]) == 0 or len(conf["user"]) == 0 or len(conf["password"]) == 0 or len(conf["database"]) == 0:
             raise Exception("wrong data input in conf file")
@@ -17,9 +17,13 @@ class Connection:
             database=conf["database"],
             port=conf['port'],
         )
-    '''
-    metodat pro vytvoreni pripojeni do DB
-    '''
+
     def con(self):
+        '''
+        metodat pro vytvoreni pripojeni do DB
+        '''
         return self.connection
+
+    def commit(self):
+        self.connection.commit()
 

@@ -4,24 +4,37 @@ from PyQt6 import QtWidgets
 from winZam import prihlaseniZam
 from conDB import connection
 from conDB import metody
+from winZam import odpovedObj
+from winZam import kalendar
 
 class Ui_MainWindow(object):
-    def setupUi(self, MainWindow, auser):
+    def setupUi(self, MainWindow, auser, globalID):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1094, 725)
+        MainWindow.resize(1020, 725)
         c = connection.Connection()
         con = c.con()
         self.okno = MainWindow
         self.autoservisId = auser
+        self.globalId = globalID
         self.typy = ['','servis', 'bouračka', 'oprava']
-        self.colmn = ['id','model', 'najeto', 'km', 'typ', 'rok_vyroby', 'email']
-        self.colmnS = [100, 150, 130, 150, 100, 150, 230]
+        self.colmn = ['id','model', 'rok_vyroby', 'km', 'typ', 'datum', 'email', 'odpoved']
+        self.colmnS = [90, 110, 120, 150, 100, 140, 200, 70]
         self.obj = []
         c = connection.Connection()
         self.con = c.con()
         for i in metody.getObjednavky(self.con, self.autoservisId,None,None):
             a = list(i)
             self.obj.append(a)
+
+        for j in metody.getOdpovedi(self.con):
+            for i in self.obj:
+                if i[0] == j[1]:
+                    i.append('✅')
+
+        for i in self.obj:
+            if len(i) == 7:
+                i.append('❌')
+
         self.modely = metody.getModely(con)
         self.centralwidget = QtWidgets.QWidget(parent=MainWindow)
         self.centralwidget.setObjectName("centralwidget")
@@ -53,6 +66,10 @@ class Ui_MainWindow(object):
         self.label.setFont(font)
         self.label.setObjectName("label")
         self.horizontalLayout_3.addWidget(self.label)
+        self.btnkalendar = QtWidgets.QPushButton(parent=self.centralwidget)
+        self.btnkalendar.setMaximumSize(QtCore.QSize(125, 16777215))
+        self.btnkalendar.setObjectName("btnkalendar")
+        self.horizontalLayout_3.addWidget(self.btnkalendar)
         self.btnOdhlasitse = QtWidgets.QPushButton(parent=self.centralwidget)
         self.btnOdhlasitse.setMaximumSize(QtCore.QSize(125, 16777215))
         self.btnOdhlasitse.setObjectName("btnOdhlasitse")
@@ -104,6 +121,12 @@ class Ui_MainWindow(object):
         for i in self.typy:
             self.comboTyp.addItem("")
         self.horizontalLayout_2.addWidget(self.comboTyp)
+        self.comboOdpoved = QtWidgets.QComboBox(parent=self.centralwidget)
+        self.comboOdpoved.setObjectName("comboOdpoved")
+        self.comboOdpoved.addItem("")
+        self.comboOdpoved.addItem("")
+        self.comboOdpoved.addItem("")
+        self.horizontalLayout_2.addWidget(self.comboOdpoved)
         self.btnRefresh = QtWidgets.QPushButton(parent=self.centralwidget)
         font = QtGui.QFont()
         font.setPointSize(13)
@@ -131,6 +154,8 @@ class Ui_MainWindow(object):
         self.btnOdhlasitse.clicked.connect(self.odhlasitSe)
         self.btnRefresh.clicked.connect(self.getCombo)
         self.btnRefresh.clicked.connect(self.obnovit)
+        self.btnHledat.clicked.connect(self.hledatAkce)
+        self.btnkalendar.clicked.connect(self.kalenndarAkce)
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
@@ -138,6 +163,32 @@ class Ui_MainWindow(object):
         prihlaseniZam.zobrazPrilaseni(self)
         self.okno.close()
 
+    def kalenndarAkce(self):
+        try:
+            self.chybHlaska.setText('')
+            kalendar.zobrazKalendar(self, self.globalId)
+        except Exception as e:
+            self.chybHlaska.setText(str(e))
+
+    def hledatAkce(self):
+        je = False
+        for i in self.obj:
+            if i[0] == self.spinId.value():
+                je = True
+                ob = i
+        if je:
+            try:
+                self.chybHlaska.setText('')
+                self.Form = QtWidgets.QWidget()
+                self.ui = odpovedObj.Ui_Form()
+                self.ui.setupUi(self.Form, ob, self.globalId)
+                self.Form.show()
+                self.getCombo()
+                self.obnovit()
+            except Exception as e:
+                self.chybHlaska.setText(str(e))
+        else:
+            self.chybHlaska.setText('objednavka neni v seznamu')
 
     def getCombo(self):
         if self.comboMode.currentText() == '':
@@ -153,6 +204,29 @@ class Ui_MainWindow(object):
             a = list(i)
             self.obj.append(a)
 
+        cc = connection.Connection()
+        con = cc.con()
+        for j in metody.getOdpovedi(con):
+            for i in self.obj:
+                if i[0] == j[1]:
+                    i.append('✅')
+        con.close()
+        for i in self.obj:
+            if len(i) == 7:
+                i.append('❌')
+        if self.comboOdpoved.currentText() == '':
+            od = None
+        else:
+            od = self.comboOdpoved.currentText()
+        lis = []
+        if od != None:
+            for i in self.obj:
+                if i[7] == od:
+                    lis.append(i)
+        else:
+            lis = self.obj
+        self.obj = lis
+
     def obnovit(self):
         if len(self.obj) != 0:
             for i in range(0,len(self.obj[0])):
@@ -165,6 +239,8 @@ class Ui_MainWindow(object):
                 self.tabulka.insertRow(x)
                 for j,k in enumerate(y):
                     self.tabulka.setItem(x, j, QtWidgets.QTableWidgetItem(str(k)))
+        else:
+            self.tabulka.setRowCount(0)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -173,12 +249,16 @@ class Ui_MainWindow(object):
         self.btnHledat.setText(_translate("MainWindow", "Hledat"))
         self.label.setText(_translate("MainWindow", "Objdenávky"))
         self.btnOdhlasitse.setText(_translate("MainWindow", "Odhlásit se"))
+        self.btnkalendar.setText(_translate("MainWindow", "Kalendář"))
         self.label_2.setText(_translate("MainWindow", "Filtr"))
         self.comboMode.setItemText(0, _translate("MainWindow", ""))
         for i in self.modely:
             self.comboMode.setItemText(self.modely.index(i)+1, _translate("MainWindow", str(i)))
         for i in self.typy:
             self.comboTyp.setItemText(self.typy.index(i), _translate("MainWindow", str(i)))
+        self.comboOdpoved.setItemText(0, _translate("MainWindow", ''))
+        self.comboOdpoved.setItemText(1, _translate("MainWindow", '✅'))
+        self.comboOdpoved.setItemText(2, _translate("MainWindow", '❌'))
         if len(self.obj) != 0:
             for i in self.colmn:
                 item = self.tabulka.horizontalHeaderItem(self.colmn.index(i))
@@ -186,17 +266,9 @@ class Ui_MainWindow(object):
         else:
             pass
 
-def zobrazHlavniMenu(object=object, auservis=None):
+def zobrazHlavniMenu(object=object, auservis=None, globalID=None):
     object.MainWindow = QtWidgets.QMainWindow()
     object.ui = Ui_MainWindow()
-    object.ui.setupUi(object.MainWindow, auservis)
+    object.ui.setupUi(object.MainWindow, auservis, globalID)
     object.MainWindow.show()
 
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow, 1)
-    MainWindow.show()
-    sys.exit(app.exec())

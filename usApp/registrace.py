@@ -1,7 +1,7 @@
 import re
 import hashlib
-from conDB import connection
-from usApp import ochrana
+from conDB import connection, ochrana
+
 
 class SpatnaRegistrError(Exception):
     def __init__(self, mes):

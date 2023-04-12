@@ -1,7 +1,7 @@
 import datetime
-from conDB import connection, metody
+from conDB import metody, ochrana
 from usApp import metody as metodyCas
-from usApp import ochrana
+
 
 class ChybaText(Exception):
     def __init__(self, mes):
