@@ -11,7 +11,7 @@ from src.win import prihlaseni, odpovedReakce
 from src.win import uzivatel
 from src.conDB import connection, metody as metodyDB
 from src.win import seznamAutoservisu
-
+from vendor.rp import resource_path
 
 class Ui_pomoc:
     def retranslateUi(self, autoservisUs, jmeno):
@@ -40,11 +40,11 @@ class Ui_pomoc:
         self.label_13.setText(_translate("autoservisUs", "Vyhledat: ID"))
         self.btnVyhledat.setText(_translate("autoservisUs", "Vyhledat"))
         self.label_8.setText(_translate("autoservisUs", "Odpovědi"))
-        self.btnRefresh.setIcon(QIcon('../OMEGA/src/img/refresh.png'))
+        self.btnRefresh.setIcon(QIcon(resource_path('src/img/refresh.png')))
         self.btnRefresh.setIconSize(QSize(30, 30))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("autoservisUs", "Odpovědi"))
         self.btnOdhlasitse.setText(_translate("autoservisUs", "Odhlásit se"))
-        self.btnUs.setIcon(QIcon('../OMEGA/src/img/user.png'))
+        self.btnUs.setIcon(QIcon(resource_path('src/img/user.png')))
         self.btnUs.setIconSize(QSize(22, 22))
         self.usjmeno.setText(_translate("autoservisUs", jmeno))
         self.btnAutoservisy.setText(_translate("autoservisUs", "Autoservisy"))

@@ -3,7 +3,7 @@ from PyQt6 import QtGui
 from PyQt6 import QtWidgets
 from src.conDB import connection, metody
 from src.winZam import kalendar, odpovedObj, prihlaseniZam
-
+from vendor.rp import resource_path
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow, auser, globalID):
@@ -131,7 +131,7 @@ class Ui_MainWindow(object):
         self.btnRefresh.setFont(font)
         self.btnRefresh.setText("")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../img/refresh.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon.addPixmap(QtGui.QPixmap(resource_path("src/img/refresh.png")), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.btnRefresh.setIcon(icon)
         self.btnRefresh.setIconSize(QtCore.QSize(22, 22))
         self.btnRefresh.setDefault(False)

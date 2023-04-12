@@ -8,6 +8,7 @@ from PyQt6.QtWidgets import QLineEdit
 from src.win import registrForm
 from src.usApp import prihlaseni as prihlasse
 from src.win import autoservisUs
+from vendor.rp import resource_path
 
 class Ui_prihlaseni(object):
     def ui_rozhrani(self, email):
@@ -86,7 +87,7 @@ class Ui_prihlaseni(object):
         self.lobrazek.setMinimumSize(QtCore.QSize(163, 99))
         self.lobrazek.setMaximumSize(QtCore.QSize(164, 100))
         self.lobrazek.setText("")
-        self.lobrazek.setPixmap(QtGui.QPixmap("winUI/../src/img/skoda3.png"))
+        self.lobrazek.setPixmap(QtGui.QPixmap(resource_path("src/img/skoda3.png")))
         self.lobrazek.setScaledContents(True)
         self.lobrazek.setObjectName("lobrazek")
         self.horizontalLayout_8.addWidget(self.lobrazek)
@@ -141,7 +142,7 @@ class Ui_prihlaseni(object):
     def retranslateUi(self, prihlaseni):
         _translate = QtCore.QCoreApplication.translate
         prihlaseni.setWindowTitle(_translate("autoservis", "autoservis"))
-        prihlaseni.setWindowIcon(QIcon('../img/user.png'))
+        prihlaseni.setWindowIcon(QIcon('src/img/user.png'))
         self.label_2.setText(_translate("prihlaseni", "Přihlásit se"))
         self.label_4.setText(_translate("prihlaseni", "email"))
         self.label_5.setText(_translate("prihlaseni", "heslo"))

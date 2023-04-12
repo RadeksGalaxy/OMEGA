@@ -1,7 +1,7 @@
 import datetime
 import json
 from src.conDB import connection, ochrana
-
+from vendor.rp import resource_path
 
 class ProblemOdpoved(Exception):
     def __init__(self, mes):
@@ -90,7 +90,7 @@ class Odpoved:
         }
 
         cas = dny[datum.strftime("%a")]
-        f = open('../datasets/oteviraciDoba.json')
+        f = open(resource_path('src/datasets/oteviraciDoba.json'))
         data = json.load(f)
         a = data.pop('date')
 

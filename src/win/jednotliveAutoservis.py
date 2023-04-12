@@ -3,6 +3,7 @@ from PyQt6 import QtCore
 from PyQt6 import QtGui
 from src.usApp import autoservisPopis
 from src.win import jednotliveAutoservisII
+from vendor.rp import resource_path
 
 class Ui_JedAutoser(jednotliveAutoservisII.Ui_JedAutoserII, object):
     def setupUi(self, Form, autoservis):
@@ -136,7 +137,7 @@ class Ui_JedAutoser(jednotliveAutoservisII.Ui_JedAutoserII, object):
         self.label_17 = QtWidgets.QLabel(parent=Form)
         self.label_17.setMaximumSize(QtCore.QSize(22, 22))
         self.label_17.setText("")
-        self.label_17.setPixmap(QtGui.QPixmap("../OMEGA/src/img/phone.png"))
+        self.label_17.setPixmap(QtGui.QPixmap(resource_path("src/img/phone.png")))
         self.label_17.setScaledContents(True)
         self.label_17.setAlignment(QtCore.Qt.AlignmentFlag.AlignRight|QtCore.Qt.AlignmentFlag.AlignTrailing|QtCore.Qt.AlignmentFlag.AlignVCenter)
         self.label_17.setObjectName("label_17")
@@ -156,7 +157,7 @@ class Ui_JedAutoser(jednotliveAutoservisII.Ui_JedAutoserII, object):
         self.label_18 = QtWidgets.QLabel(parent=Form)
         self.label_18.setMaximumSize(QtCore.QSize(22, 22))
         self.label_18.setText("")
-        self.label_18.setPixmap(QtGui.QPixmap("../OMEGA/src/img/phone.png"))
+        self.label_18.setPixmap(QtGui.QPixmap(resource_path("src/img/phone.png")))
         self.label_18.setScaledContents(True)
         self.label_18.setObjectName("label_18")
         self.layoutTel2.addWidget(self.label_18)
@@ -175,7 +176,7 @@ class Ui_JedAutoser(jednotliveAutoservisII.Ui_JedAutoserII, object):
         self.label_19 = QtWidgets.QLabel(parent=Form)
         self.label_19.setMaximumSize(QtCore.QSize(22, 22))
         self.label_19.setText("")
-        self.label_19.setPixmap(QtGui.QPixmap("../OMEGA/src/img/phone.png"))
+        self.label_19.setPixmap(QtGui.QPixmap(resource_path("src/img/phone.png")))
         self.label_19.setScaledContents(True)
         self.label_19.setObjectName("label_19")
         self.layoutTel3.addWidget(self.label_19)
@@ -194,7 +195,7 @@ class Ui_JedAutoser(jednotliveAutoservisII.Ui_JedAutoserII, object):
         self.label_20 = QtWidgets.QLabel(parent=Form)
         self.label_20.setMaximumSize(QtCore.QSize(22, 22))
         self.label_20.setText("")
-        self.label_20.setPixmap(QtGui.QPixmap("../OMEGA/src/img/phone.png"))
+        self.label_20.setPixmap(QtGui.QPixmap(resource_path("src/img/phone.png")))
         self.label_20.setScaledContents(True)
         self.label_20.setObjectName("label_20")
         self.layoutTel4.addWidget(self.label_20)
@@ -213,7 +214,7 @@ class Ui_JedAutoser(jednotliveAutoservisII.Ui_JedAutoserII, object):
         self.label_21 = QtWidgets.QLabel(parent=Form)
         self.label_21.setMaximumSize(QtCore.QSize(22, 22))
         self.label_21.setText("")
-        self.label_21.setPixmap(QtGui.QPixmap("../OMEGA/src/img/email.png"))
+        self.label_21.setPixmap(QtGui.QPixmap(resource_path("src/img/email.png")))
         self.label_21.setScaledContents(True)
         self.label_21.setObjectName("label_21")
         self.layoutEmail.addWidget(self.label_21)

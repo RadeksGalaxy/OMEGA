@@ -2,7 +2,7 @@ import requests
 from src.conDB import connection
 import json
 import datetime
-
+from vendor.rp import resource_path
 
 def aktualizaceSouboruOtevreni():
     datum1 = f'{datetime.datetime.now().year}-{datetime.datetime.now().month}-{datetime.datetime.now().day} {datetime.datetime.now().hour}:{datetime.datetime.now().minute}:{datetime.datetime.now().second}'
@@ -49,7 +49,7 @@ def aktualizaceSouboruOtevreni():
             raise Exception('error')
 
     json_object = json.dumps(seznamOtevreni, indent=2)
-    with open("../datasets/oteviraciDoba.json", "w") as outfile:
+    with open(resource_path("src/datasets/oteviraciDoba.json"), "w") as outfile:
         outfile.write(json_object)
 
 

@@ -1,12 +1,13 @@
 import json
 import mysql.connector
+from vendor.rp import resource_path
 
 class Connection:
     def __init__(self):
         '''
         trida pro pripojeni do DB podle architektury singleton
         '''
-        with open("../OMEGA/config/confDB.json", "r") as f:
+        with open(resource_path("config/confDB.json"), "r") as f:
             conf = json.load(f)
         if len(conf["host"]) == 0 or len(conf["user"]) == 0 or len(conf["password"]) == 0 or len(conf["database"]) == 0:
             raise Exception("wrong data input in conf file")

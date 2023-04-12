@@ -1,6 +1,6 @@
 import json
 from src.conDB import connection
-
+from vendor.rp import resource_path
 
 class Autoservisy:
     def __init__(self, globalId=None,nazev=None,mesto=None,ulice=None,psc=None,prodejAut=None,servisAut=None,email=None,url=None,logo=None):
@@ -122,7 +122,7 @@ class Autoservisy:
         :return: None
         '''
         celkem = []
-        with open('../datasets/czAutoservisySkoda.json', 'r') as f:
+        with open(resource_path('src/datasets/czAutoservisySkoda.json'), 'r') as f:
             data = json.load(f)
 
         for i in data['Items']:

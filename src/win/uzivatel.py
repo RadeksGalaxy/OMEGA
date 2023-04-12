@@ -4,7 +4,7 @@ from PyQt6 import QtCore
 from PyQt6.QtCore import QSize
 from PyQt6.QtGui import QIcon
 from src.usApp import registrace
-
+from vendor.rp import resource_path
 
 class Ui_Form(object):
     def setupUi(self, Form, email):
@@ -92,7 +92,7 @@ class Ui_Form(object):
         self.label_8.setText(_translate("Form", "Uživatelské jméno:"))
         self.label_6.setText(_translate("Form", "email: "))
         self.label.setText(_translate("Form", "Uživatel"))
-        self.btnHome.setIcon(QIcon('../OMEGA/src/img/home.png'))
+        self.btnHome.setIcon(QIcon(resource_path('src/img/home.png')))
         self.btnHome.setIconSize(QSize(30, 30))
         self.usjmeno.setText(_translate("Form", str(listik[0][3])))
         self.email.setText(_translate("Form", str(listik[0][4])))
