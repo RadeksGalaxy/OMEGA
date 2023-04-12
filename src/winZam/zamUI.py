@@ -5,7 +5,7 @@ from src.conDB import connection, metody
 from src.winZam import kalendar, odpovedObj, prihlaseniZam
 from vendor.rp import resource_path
 
-class Ui_MainWindow(object):
+class Ui_MainZamWin(object):
     def setupUi(self, MainWindow, auser, globalID):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1020, 725)
@@ -178,7 +178,7 @@ class Ui_MainWindow(object):
             try:
                 self.chybHlaska.setText('')
                 self.Form = QtWidgets.QWidget()
-                self.ui = odpovedObj.Ui_Form()
+                self.ui = odpovedObj.Ui_OdpovedForm()
                 self.ui.setupUi(self.Form, ob, self.globalId)
                 self.Form.show()
                 self.getCombo()
@@ -266,7 +266,7 @@ class Ui_MainWindow(object):
 
 def zobrazHlavniMenu(object=object, auservis=None, globalID=None):
     object.MainWindow = QtWidgets.QMainWindow()
-    object.ui = Ui_MainWindow()
+    object.ui = Ui_MainZamWin()
     object.ui.setupUi(object.MainWindow, auservis, globalID)
     object.MainWindow.show()
 

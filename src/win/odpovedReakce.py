@@ -3,7 +3,7 @@ from src.conDB import connection, metody
 from vendor.tableModel import TableModel
 import pandas as pd
 
-class Ui_Form(object):
+class Ui_OdpovedForm(object):
     def setupUi(self, Form, objID):
         Form.setObjectName("Form")
         Form.resize(768, 501)
@@ -155,7 +155,7 @@ class Ui_Form(object):
 
 def zobrazOdpovedId(object: object, objID):
     object.Form = QtWidgets.QWidget()
-    object.ui = Ui_Form()
+    object.ui = Ui_OdpovedForm()
     object.ui.setupUi(object.Form , objID)
     object.Form.show()
 

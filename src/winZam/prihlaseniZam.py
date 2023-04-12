@@ -4,7 +4,7 @@ from src.zamApp import prihlaseni
 from src.winZam import zamUI
 
 
-class Ui_MainWindow(object):
+class Ui_PrihlaseniZam(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(910, 560)
@@ -107,7 +107,7 @@ class Ui_MainWindow(object):
 
 def zobrazPrilaseni(object=object):
     object.MainWindow = QtWidgets.QMainWindow()
-    object.ui = Ui_MainWindow()
+    object.ui = Ui_PrihlaseniZam()
     object.ui.setupUi(object.MainWindow)
     object.MainWindow.show()
 

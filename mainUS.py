@@ -6,7 +6,7 @@ if __name__ == "__main__":
     try:
         app = QtWidgets.QApplication(sys.argv)
         prihlaseni = QtWidgets.QMainWindow()
-        ui = s.Ui_prihlaseni()
+        ui = s.Ui_Prihlaseni()
         ui.setupUi(prihlaseni)
         prihlaseni.show()
         sys.exit(app.exec())

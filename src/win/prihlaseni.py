@@ -10,10 +10,10 @@ from src.usApp import prihlaseni as prihlasse
 from src.win import autoservisUs
 from vendor.rp import resource_path
 
-class Ui_prihlaseni(object):
+class Ui_Prihlaseni(object):
     def ui_rozhrani(self, email):
         self.autoservisUs = QtWidgets.QMainWindow()
-        self.ui = autoservisUs.Ui_autoservisUs()
+        self.ui = autoservisUs.Ui_AutoservisUs()
         self.ui.setupUi(self.autoservisUs, email, [])
         self.autoservisUs.show()
 
@@ -151,6 +151,6 @@ class Ui_prihlaseni(object):
 
 def zobrazUzivatele(object : object):
     object.prihlaseni = QtWidgets.QMainWindow()
-    object.ui = Ui_prihlaseni()
+    object.ui = Ui_Prihlaseni()
     object.ui.setupUi(object.prihlaseni)
     object.prihlaseni.show()

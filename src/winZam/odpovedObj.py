@@ -7,7 +7,7 @@ from vendor.tableModel import TableModel
 from src.zamApp import odpoved
 
 
-class Ui_Form(object):
+class Ui_OdpovedForm(object):
     def setupUi(self, Form, ob, globalID):
         Form.setObjectName("Form")
         Form.resize(860, 570)

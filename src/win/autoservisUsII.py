@@ -13,7 +13,7 @@ from src.conDB import connection, metody as metodyDB
 from src.win import seznamAutoservisu
 from vendor.rp import resource_path
 
-class Ui_pomoc:
+class Ui_PomocAutoservis:
     def retranslateUi(self, autoservisUs, jmeno):
         _translate = QtCore.QCoreApplication.translate
         autoservisUs.setWindowTitle(_translate("autoservisUs", "autoservisUs"))

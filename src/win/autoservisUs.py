@@ -3,12 +3,12 @@ from PyQt6 import QtCore
 from PyQt6 import QtGui
 
 from src.conDB import metody as metodyDB
-from src.win.autoservisUsII import Ui_pomoc
+from src.win.autoservisUsII import Ui_PomocAutoservis
 from src.usApp import autoservis
 import datetime
 
 
-class Ui_autoservisUs(Ui_pomoc, object):
+class Ui_AutoservisUs(Ui_PomocAutoservis, object):
     def setupUi(self, autoservisUs, email, autoser):
         autoservisUs.setObjectName("autoservisUs")
         autoservisUs.resize(980, 680)
@@ -265,6 +265,6 @@ class Ui_autoservisUs(Ui_pomoc, object):
 
 def zobrazHlavniMenu(object : object, email, autoservisy):
     object.autoservisUs = QtWidgets.QMainWindow()
-    object.ui = Ui_autoservisUs()
+    object.ui = Ui_AutoservisUs()
     object.ui.setupUi(object.autoservisUs, email, autoservisy)
     object.autoservisUs.show()
