@@ -1,6 +1,6 @@
 from PyQt6 import QtWidgets
 import sys
-from win import prihlaseni as s
+from src.win import prihlaseni as s
 
 if __name__ == "__main__":
     try:

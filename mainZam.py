@@ -1,6 +1,6 @@
 from PyQt6 import QtWidgets
 import sys
-from winZam import prihlaseniZam as s
+from src.winZam import prihlaseniZam as s
 
 if __name__ == "__main__":
     try:
