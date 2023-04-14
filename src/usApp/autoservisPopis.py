@@ -78,6 +78,11 @@ class AutoservisPopis (autoservis.Autoservisy):
 
     @staticmethod
     def vytvorPrehled(autoservis):
+        '''
+        metoda pro vytvoreni prehledu autoservisu metodou vytazeni dat ze souboru a vlozeni do listu
+        :param autoservis: global id autoservisu
+        :return: list vytazeni dat ze souboru
+        '''
         a = AutoservisPopis()
         c = connection.Connection()
         con = c.con()

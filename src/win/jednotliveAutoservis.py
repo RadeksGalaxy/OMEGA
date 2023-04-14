@@ -7,6 +7,12 @@ from vendor.rp import resource_path
 
 class Ui_JedAutoser(jednotliveAutoservisII.Ui_JedAutoserII, object):
     def setupUi(self, Form, autoservis):
+        '''
+        metoda pro vytvoreni prehledu autoservisu
+        :param Form: form
+        :param autoservis: id autoservisu
+        :return: okno
+        '''
         Form.setObjectName("Form")
         Form.resize(450, 670)
         self.gridLayout = QtWidgets.QGridLayout(Form)
@@ -267,6 +273,12 @@ class Ui_JedAutoser(jednotliveAutoservisII.Ui_JedAutoserII, object):
 
 
 def spustitOkenko(object : object, autoservis):
+    '''
+    metoda pro vytvoreni prehledu autoservisu
+    :param object: form
+    :param autoservis: id autoservisu
+    :return: okno
+    '''
     object.Form = QtWidgets.QWidget()
     object.ui = Ui_JedAutoser()
     object.ui.setupUi(object.Form, autoservis)

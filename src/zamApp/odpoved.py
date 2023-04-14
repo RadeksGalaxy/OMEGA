@@ -9,6 +9,15 @@ class ProblemOdpoved(Exception):
 
 class Odpoved:
     def __init__(self, objId=None, datum=None, casPred=None, cas=None, delka=None, poz=None):
+        '''
+        trida pro odpoved zakaznikove objednavce
+        :param objId: id objednavky
+        :param datum: datum
+        :param casPred: cas zacatku servisu
+        :param cas: odhad skonceni sercisu
+        :param delka: delka servisu
+        :param poz: poznamka
+        '''
         self.odjId = objId
         self.datum = datum
         self.casPred = casPred
@@ -65,6 +74,11 @@ class Odpoved:
         self._poz =value
 
     def vlozObj(self, con):
+        '''
+        metoda pro vlozeni odpovedi do db
+        :param con: connection
+        :return: vlozeni do DB
+        '''
         cursor = con.cursor()
         sql = "insert into odpoved(obj_id, datum, casPred, cas, delka, poz) values (%s, %s, %s, %s, %s, %s);"
         val = [self.objId, self.datum, self.casPred, self.cas, self.delka, self.poz]
@@ -74,6 +88,16 @@ class Odpoved:
 
     @staticmethod
     def vytvorOdpoved(globalID=None, obj_id=None, datum=None, casServisu=None, delka=None, poznamka=None):
+        '''
+        metoda pro vytvoreni odpovedi a vlozeni do DB z okenka
+        :param globalID: globalni id autoservisu
+        :param obj_id: id objednavky
+        :param datum: datum
+        :param casServisu: cas zacatku servisu
+        :param delka: delka servisu
+        :param poznamka: poznamka
+        :return: vlozeni do DB
+        '''
         o = Odpoved()
         c = connection.Connection()
         con = c.con()

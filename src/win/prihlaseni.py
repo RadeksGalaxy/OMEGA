@@ -12,12 +12,22 @@ from vendor.rp import resource_path
 
 class Ui_Prihlaseni(object):
     def ui_rozhrani(self, email):
+        '''
+        metoda na zobrazeni uvodniho okna po prihlaseni
+        :param email: email uz
+        :return: okno
+        '''
         self.autoservisUs = QtWidgets.QMainWindow()
         self.ui = autoservisUs.Ui_AutoservisUs()
         self.ui.setupUi(self.autoservisUs, email, [])
         self.autoservisUs.show()
 
     def setupUi(self, prihlaseni):
+        '''
+        metoda pro nastaveni objektu okna
+        :param prihlaseni: prihlaseni
+        :return: okno
+        '''
         prihlaseni.setObjectName("prihlaseni")
         prihlaseni.resize(960, 540)
         self.prihl = prihlaseni
@@ -68,12 +78,14 @@ class Ui_Prihlaseni(object):
         self.formLayout.setWidget(6, QtWidgets.QFormLayout.ItemRole.SpanningRole, self.chybHlaska)
         self.loginBtn = QtWidgets.QPushButton(parent=self.centralwidget)
         self.loginBtn.setObjectName("loginBtn")
+        self.loginBtn.setMinimumSize(QtCore.QSize(250, 0))
         self.formLayout.setWidget(7, QtWidgets.QFormLayout.ItemRole.SpanningRole, self.loginBtn)
         spacerItem4 = QtWidgets.QSpacerItem(20, 10, QtWidgets.QSizePolicy.Policy.Minimum,
                                             QtWidgets.QSizePolicy.Policy.Minimum)
         self.formLayout.setItem(8, QtWidgets.QFormLayout.ItemRole.SpanningRole, spacerItem4)
         self.registrBtn = QtWidgets.QPushButton(parent=self.centralwidget)
         self.registrBtn.setObjectName("registrBtn")
+        self.registrBtn.setMinimumSize(QtCore.QSize(250, 0))
         self.formLayout.setWidget(9, QtWidgets.QFormLayout.ItemRole.SpanningRole, self.registrBtn)
         spacerItem5 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum,
                                             QtWidgets.QSizePolicy.Policy.Expanding)
@@ -111,12 +123,20 @@ class Ui_Prihlaseni(object):
         QtCore.QMetaObject.connectSlotsByName(prihlaseni)
 
     def registrBtnAkce(self):
+        '''
+        metoda na zobrazeni okna registrace
+        :return: okno
+        '''
         self.Form = QtWidgets.QWidget()
         self.ui = registrForm.Ui_RegistrForm()
         self.ui.setupUi(self.Form)
         self.Form.show()
 
     def prihlasitBtnAkce(self):
+        '''
+        metoda na spusteni akce pro tlacitko prihlaseni
+        :return: prihlaseni
+        '''
         spravne = False
         try:
             email = self.usname.text()
@@ -140,6 +160,11 @@ class Ui_Prihlaseni(object):
             self.ui_rozhrani(self.usname.text())
 
     def retranslateUi(self, prihlaseni):
+        '''
+        metoda pro zobrazeni textu v okne prihlaseni
+        :param prihlaseni: prihlaseni
+        :return: nastaveni textu v okne
+        '''
         _translate = QtCore.QCoreApplication.translate
         prihlaseni.setWindowTitle(_translate("autoservis", "autoservis"))
         prihlaseni.setWindowIcon(QIcon('src/img/user.png'))
@@ -150,6 +175,11 @@ class Ui_Prihlaseni(object):
         self.registrBtn.setText(_translate("prihlaseni", "Registrace"))
 
 def zobrazUzivatele(object : object):
+    '''
+    metoda pro otevreni okna
+    :param object: objekt
+    :return: otevreni okna
+    '''
     object.prihlaseni = QtWidgets.QMainWindow()
     object.ui = Ui_Prihlaseni()
     object.ui.setupUi(object.prihlaseni)

@@ -8,6 +8,12 @@ class PrihlaseniError(Exception):
 
 class PrihlasZam:
     def __init__(self, autoservis=None, id=None, heslo=None):
+        '''
+        trida pro vytvvoreni prihlaseni do aplikace pro zamestnance
+        :param autoservis: id autoservisu
+        :param id: jmeno zamestnance
+        :param heslo: heslo zamestnance
+        '''
         self.autoservis = autoservis
         self.id = id
         self.heslo = heslo
@@ -37,19 +43,33 @@ class PrihlasZam:
         self._id = value
 
     def hashPass(self):
+        '''
+        metoda na zahashovani hesla v objektu
+        :return: zahashovane heslo
+        '''
         self.heslo = hashlib.sha256(self.heslo.encode()).hexdigest()
 
-    def prehledZam(self):
+    def prehledZam(self, AS):
+        '''
+        metoda pro ziskani zamestnancu z DB
+        :param AS: id autoservisu
+        :return: prehled zam v listu
+        '''
         c = connection.Connection()
         con = c.con()
         cursor = con.cursor()
-        sql = "select autoser_id, nazev,heslo from zam order by id"
-        cursor.execute(sql)
+        sql = "select autoser_id, nazev,heslo from zam where autoser_id = %s order by id"
+        val = [AS]
+        cursor.execute(sql, val)
         myresult = cursor.fetchall()
         cursor.close()
         return myresult
 
     def pridejZam(self):
+        '''
+        metoda pro registraci zamestnancu a pridani zamestnance do DB
+        :return: vlozeni zam do DB
+        '''
         c = connection.Connection()
         con = c.con()
         cursor = con.cursor()
@@ -60,6 +80,13 @@ class PrihlasZam:
 
     @staticmethod
     def prihlasitSe(autoser ,id, heslo):
+        '''
+        metoda pro prihlseni zamestnance do autoservisu pomoci okna
+        :param autoser: id autoservisu
+        :param id: jemno zam
+        :param heslo: heslo zam
+        :return: prihlaseni do app
+        '''
         p = PrihlasZam()
 
         if ochrana.sql_injection(id) or ochrana.sql_injection(heslo):
@@ -76,10 +103,9 @@ class PrihlasZam:
         p.hashPass()
 
         uzivatele = []
-        for i in p.prehledZam():
+        for i in p.prehledZam(autoser):
             a = PrihlasZam(i[0], i[1], i[2])
             uzivatele.append(a)
-
         sautoservis = True
         sid = True
         sheslo = True
@@ -97,6 +123,15 @@ class PrihlasZam:
 
     @staticmethod
     def registrace(autoS, jmeno, heslo, hesloP, con):
+        '''
+        metoda pro vytvoreni noveho zamestnance a zarazeni do jednotliveho autoservisu
+        :param autoS: id autoservisu
+        :param jmeno: jmeno zam
+        :param heslo: heslo zam
+        :param hesloP: potvrzeni hesla
+        :param con: connection
+        :return: vlozeni zam do DB
+        '''
         p = PrihlasZam()
         usjmenoRE = r'^[a-zA-Z]{3,20}$'
         hesloRE = r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,40}$'

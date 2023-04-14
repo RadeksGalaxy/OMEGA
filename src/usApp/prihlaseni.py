@@ -9,6 +9,11 @@ class SpatnePrihlaseniError(Exception):
 
 class PrihlasSe:
     def __init__(self, email=None, heslo=None):
+        '''
+        trida pro vytvoreni prihlaseni uzivatele pomoci emailu a hesla
+        :param email: email uzivatele
+        :param heslo: heslo uzivatele
+        '''
         self.email = email
         self.heslo = heslo
 
@@ -29,9 +34,17 @@ class PrihlasSe:
         self._email = value
 
     def hashPass(self):
+        '''
+        metoda pro zahashovani hesla
+        :return: objekt prihlaseni se atribut hesla zahashuje
+        '''
         self.heslo = hashlib.sha256(self.heslo.encode()).hexdigest()
 
     def prehledUzivatelu(self):
+        '''
+        metoda pro vraceni listu vsech uzivateli
+        :return: list uzivatelu
+        '''
         c = connection.Connection()
         con = c.con()
         cursor = con.cursor()
@@ -43,6 +56,12 @@ class PrihlasSe:
 
     @staticmethod
     def prihlasitSe(email, heslo):
+        '''
+        metoda pro prihlaseni se do aplikace a kontrolu dat
+        :param email: email vlozeny
+        :param heslo: vlozene heslo
+        :return: none
+        '''
         l = PrihlasSe()
         emailRE = r'^[a-zA-Z0-9._%+-]{1,50}@[a-zA-Z0-9.-]{1,20}\.[a-zA-Z]{2,10}$'
         hesloRE = r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,40}$'

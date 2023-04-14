@@ -9,6 +9,16 @@ class ChybaText(Exception):
 
 class Objednavka:
     def __init__(self, autoservis=None, model=None, vyroba=None, km=None, typ=None, datum=None, poz=None):
+        '''
+        trida pro vytvoreni objednavky uzivatelem
+        :param autoservis: autoservis
+        :param model: model auta
+        :param vyroba: rok vyrobeni auta
+        :param km: najete kilometry auta
+        :param typ: typ servisu
+        :param datum: datum vytvoreni objednavky
+        :param poz: poznamka od uz
+        '''
         self.autoservis = autoservis
         self.model = model
         self.vyroba = vyroba
@@ -74,6 +84,12 @@ class Objednavka:
         self._poz = value
 
     def vlozeni(self, con, email):
+        '''
+        metoda pro vlozeni objednavky do db
+        :param con: connection
+        :param email: email pro ziskani id
+        :return: vlozeni do db
+        '''
         idUs = metody.getIdUzivatele(email, con)
         cursor = con.cursor()
         sql = "insert into objednavky(autoservis_id, model_id, rok_vyroby, km, typ, datum, poz, us_id) values (%s, %s, %s, %s, %s, %s, %s, %s);"
@@ -84,6 +100,22 @@ class Objednavka:
 
     @staticmethod
     def vytvorObjednavku(autoservis,model,vyroba,km,typSer,typOpr,typBour,rok,mesic,den,poznamka, con):
+        '''
+        metoda pro vytvoreni objednavky
+        :param autoservis: id autoservisu
+        :param model: model auta
+        :param vyroba: rok vyrobeni auta
+        :param km: najeto km
+        :param typSer: rbtn pokud je zapnuty je nastaven na true
+        :param typOpr: rbtn pokud je zapnuty je nastaven na true
+        :param typBour: rbtn pokud je zapnuty je nastaven na true
+        :param rok: rok objednavky
+        :param mesic: mesic objednavky
+        :param den: den objednavky
+        :param poznamka: poznamka od uz
+        :param con: connection
+        :return: vlozeni objednavky do db
+        '''
         modelID = metody.getIdModelu(model, con)
         autoservisID = metody.getIdAutoservisu(autoservis, con)
 

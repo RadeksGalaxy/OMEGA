@@ -9,6 +9,14 @@ class SpatnaRegistrError(Exception):
 
 class Registrace:
     def __init__(self, usjmeno=None, jmeno=None, prijmeni=None, heslo=None, email=None):
+        '''
+        trida pro registraci uzivatele = vytvoreni noveho uzivatele
+        :param usjmeno: uzivateleske jmeno
+        :param jmeno: jmeno uzivatele
+        :param prijmeni: prijmeni uzivatele
+        :param heslo: heslo uzivatele
+        :param email: email uzivatele
+        '''
         self.usjmeno = usjmeno
         self.jmeno = jmeno
         self.prijmeni = prijmeni
@@ -59,9 +67,17 @@ class Registrace:
 
 
     def hashPass(self):
+        '''
+       metoda pro zahashovani hesla
+       :return: objekt prihlaseni se atribut hesla zahashuje
+       '''
         self.heslo = hashlib.sha256(self.heslo.encode()).hexdigest()
 
     def prehledUzivatelu(self):
+        '''
+        metoda pro vraceni listu vsech uzivateli
+        :return: list uzivatelu
+        '''
         cursor = self.con.cursor()
         sql = "select * from user order by id;"
         cursor.execute(sql)
@@ -70,14 +86,26 @@ class Registrace:
         return myresult
 
     def pridaniUz(self):
-        cursor = self.con.cursor()
+        '''
+        metoda pro vlozeni noveho uzivatele do db
+        :return: vlozi uzivatele do db
+        '''
+        c = connection.Connection()
+        con = c.con()
+        cursor = con.cursor()
         sql = "insert into user(jmeno, prijmeni, usjmeno, email, heslo) values  (%s, %s, %s, %s, %s);"
         val = [self.jmeno, self.prijmeni, self.usjmeno, self.email, self.heslo]
         cursor.execute(sql, val)
         self.con.commit()
         cursor.close()
+        c.commit()
 
     def vyhledesjPodleEmailu(self, email):
+        '''
+        metoda pro vypsani uzivatelu podle emailu
+        :param email: vyhledavany email
+        :return: uzivatel s vyhledavanym emailem
+        '''
         cursor = self.con.cursor()
         sql = "select * from user where email='"+email+"' order by id;"
         cursor.execute(sql)
@@ -86,10 +114,23 @@ class Registrace:
         return myresult
 
     def uyToString(self):
+        '''
+        metoda na vypsani objektu
+        :return: vypsani
+        '''
         return f'{self.jmeno}  {self.prijmeni}  {self.usjmeno}  {self.email}  {self.heslo}'
 
     @staticmethod
     def registrovatSe(jmeno, prijmeni, usjmeno, email, heslo):
+        '''
+        metoda pro vytvoreni a zkontrolovani vstupu uzivatele do DB
+        :param jmeno:jmeno uz
+        :param prijmeni: prijmeni uz
+        :param usjmeno: uzivatelske jmeno uz
+        :param email: email uz
+        :param heslo:heslo uz
+        :return:
+        '''
         r = Registrace()
 
         usjmenoRE = r'^[a-zA-Z0-9_-]{5,20}$'
@@ -135,3 +176,4 @@ class Registrace:
         r.usjmeno = usjmeno
         r.hashPass()
         r.pridaniUz()
+

@@ -240,6 +240,12 @@ def getObjednavkyPoz(con, id):
         raise ProblemDB('Error DB')
 
 def getUziv(con, id):
+    '''
+    metoda pro vraceni uzivatele podle id
+    :param con: connection
+    :param id: vyhledavane id
+    :return: uzivatel
+    '''
     try:
         cursor = con.cursor()
         sql = f'select * from user where id = {id};'
@@ -251,6 +257,11 @@ def getUziv(con, id):
         raise ProblemDB('Error DB')
 
 def getOdpovedi(con):
+    '''
+    metoda pro vraceni odpovedi z db
+    :param con: conection
+    :return: odpovedi z db
+    '''
     try:
         cursor = con.cursor()
         sql = f'select * from odpoved order by id;'
@@ -262,14 +273,21 @@ def getOdpovedi(con):
         raise ProblemDB('Error DB')
 
 
-def getOdpovediUpravene(con):
+def getOdpovediUpravene(con, uz):
+    '''
+    vraceni odpovedi z db pro jednotliveho uzivatele
+    :param con: connection
+    :param uz: email uzivatele
+    :return: vsechny odpovedi
+    '''
     try:
         cursor = con.cursor()
         sql = f'select od.obj_id, o.typ, od.datum, od.casPred, od.cas, od.delka, od.odpoved ' \
               f'from odpoved od inner join objednavky o on od.obj_id = o.id inner join user u on o.us_id = u.id ' \
-              f'where od.datum >= sysdate() ' \
+              f'where od.datum >= sysdate() and u.email = %s ' \
               f'order by od.datum;'
-        cursor.execute(sql)
+        val = [uz]
+        cursor.execute(sql, val)
         myresult = cursor.fetchall()
         cursor.close()
         lis = []
@@ -295,6 +313,12 @@ def getOdpovediUpravene(con):
         raise ProblemDB('Error DB')
 
 def getOdpovedFinal(con, objID):
+    '''
+    metoda pro vypsani konecne odpovedi z db podle id objednavky
+    :param con: connection
+    :param objID: id objednavky
+    :return: vrati objednavku z db podle id
+    '''
     try:
         cursor = con.cursor()
         sql = f'select autoservis_id from objednavky where id = {objID};'
@@ -339,6 +363,13 @@ def getOdpovedFinal(con, objID):
         raise ProblemDB('Error DB')
 
 def obnovaOdpovedi(con, val, id):
+    '''
+    metodda pro obnova odpovedi z db
+    :param con: connection
+    :param val: nova hodnota
+    :param id: id odpovedi ktertou chceme zmenit
+    :return: vrati zmenu v db
+    '''
     try:
         cursor = con.cursor()
         sql = "update odpoved set odpoved= %s where obj_id= %s;"
@@ -349,6 +380,13 @@ def obnovaOdpovedi(con, val, id):
         raise ProblemDB('Error DB')
 
 def getOdpovediKalendar(con, datum, globalID):
+    '''
+    metoda pro vraceni odpovedi pro jednotlivy datum
+    :param con: connection
+    :param datum: datum ktery hledamu
+    :param globalID: globalni id autoservisu
+    :return: vsechny odpovedi z datumu
+    '''
     try:
         cursor = con.cursor()
         sql = f'select o.obj_id, o.casPred, o.cas, o.delka, o.odpoved from odpoved as o inner join objednavky o2 on o.obj_id = o2.id where o.odpoved is not null and o.datum = %s and o2.autoservis_id = (select id from autoservisy where global_id = %s) order by o.id;'
@@ -376,6 +414,12 @@ def getOdpovediKalendar(con, datum, globalID):
         raise ProblemDB('Error DB')
 
 def getZamJmeno(con, id):
+    '''
+    metoda pro nazev zamestnance
+    :param con: connection
+    :param id: id autoservisu
+    :return: nazvy zamestnancu v jednotlivem autoservisu
+    '''
     try:
         cursor = con.cursor()
         sql = f'select nazev from zam where autoser_id = %s;'

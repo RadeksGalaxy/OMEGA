@@ -7,6 +7,13 @@ from src.win import jednotliveAutoservis
 
 class Ui_AtoservisyI(object):
     def setupUi(self, MainWindow, autoservisy, email):
+        '''
+        metoda pro nastaveni okna pro seznam autoservisu
+        :param MainWindow: okno
+        :param autoservisy: list autoservisu
+        :param email: email uzivatele
+        :return: okno AS
+        '''
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(794, 550)
         self.win = MainWindow
@@ -80,20 +87,38 @@ class Ui_AtoservisyI(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def zpetbtn(self):
+        '''
+        metoda pro zobrazeni okna autoservisu
+        :return: okno AS
+        '''
         autoservisUs.zobrazHlavniMenu(self, self.email, self.autoser)
         self.win.close()
 
     def ui_prihlaseni(self):
+        '''
+        metoda na ohlaseni
+        :return: zobrazeni okna prihlaseni
+        '''
         prihlaseni.zobrazUzivatele(self)
         self.win.close()
 
     def hledatAkce(self):
+        '''
+        metoda pro hledani vybraneho autoservisu
+        :return: okno jednotliveho as
+        '''
         try:
             jednotliveAutoservis.spustitOkenko(self, self.comboAutoservis.currentText())
         except Exception:
             self.chybHlaska.setText('Problém s připojením')
 
     def retranslateUi(self, MainWindow, autoservisy):
+        '''
+        metoda pro nastaveni textu v okne
+        :param MainWindow: okno
+        :param autoservisy: list autoservisu
+        :return: okno s textem
+        '''
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Autoservis"))
         for i in autoservisy:
@@ -105,6 +130,13 @@ class Ui_AtoservisyI(object):
 
 
 def sezAutoser(object : object, au,email):
+    '''
+    metoda pro zobrazeni okna
+    :param object: object
+    :param au: list autoservisu
+    :param email: email uz
+    :return: okno AS
+    '''
     object.MainWindow = QtWidgets.QMainWindow()
     object.ui = Ui_AtoservisyI()
     object.ui.setupUi(object.MainWindow, au, email)

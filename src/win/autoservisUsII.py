@@ -15,6 +15,12 @@ from vendor.rp import resource_path
 
 class Ui_PomocAutoservis:
     def retranslateUi(self, autoservisUs, jmeno):
+        '''
+        metoda pro udelani pohledu pro uvodni okno autoservisu pro uzivatele
+        :param autoservisUs: autoservis
+        :param jmeno: jmeno uzivatele
+        :return:
+        '''
         _translate = QtCore.QCoreApplication.translate
         autoservisUs.setWindowTitle(_translate("autoservisUs", "autoservisUs"))
         self.label_3.setText(_translate("autoservisUs", "Model"))
@@ -50,17 +56,34 @@ class Ui_PomocAutoservis:
         self.btnAutoservisy.setText(_translate("autoservisUs", "Autoservisy"))
 
     def ui_prihlaseni(self):
+        '''
+        metoda pro tlacitko odhlasit se
+        :return: zavre okno autoservisu a otevre prihlaseni
+        '''
         prihlaseni.zobrazUzivatele(self)
         self.autoservisUS.close()
 
     def ui_uzivatel(self, email):
+        '''
+        metoda pro otevreni okna prehledu uzivatele
+        :param email: email uzivatele
+        :return: okno
+        '''
         uzivatel.zobrazUzivatele(self, email)
 
     def zobrazAutoser(self):
+        '''
+        metoda pro tlacitko autoservisy
+        :return: okno prehledu
+        '''
         seznamAutoservisu.sezAutoser(self, self.autoservis, self.email)
         self.autoservisUS.close()
 
     def akceOdeslani(self):
+        '''
+        metoda pro odeslani odpovedi
+        :return: odeslani uzivatele
+        '''
         try:
             self.chybHlaska.setText('')
             c = connection.Connection()
@@ -116,6 +139,10 @@ class Ui_PomocAutoservis:
             pass
 
     def hledatAkce(self):
+        '''
+        metoda pro vyhledani odpovedi od autoservisu
+        :return: okno
+        '''
         je = False
         zodpovezeno = True
         for i in self.odpovedi:
@@ -135,8 +162,13 @@ class Ui_PomocAutoservis:
             self.chybHlaska2.setText('Tato objednavak neexistuje')
 
     def obnovaAkce(self):
+        '''
+        metoda pro obnnoveni odpoveni od autoservisu
+        :return: refresh tabuky odpovedi
+        '''
         c = connection.Connection()
-        self.odpovedi = metodyDB.getOdpovediUpravene(c.con())
+
+        self.odpovedi = metodyDB.getOdpovediUpravene(c.con(), self.email)
         index = []
         for i in range(1, len(self.odpovedi)+1):
             index.append(i)

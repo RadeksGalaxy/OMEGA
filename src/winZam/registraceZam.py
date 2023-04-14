@@ -5,6 +5,11 @@ from src.zamApp import prihlaseni
 
 class Ui_RegistraceZam(object):
     def setupUi(self, MainWindow):
+        '''
+        metoda pro nastaveni okna registrace
+        :param MainWindow: objekt
+        :return: nasteveni okna registrace
+        '''
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(650, 460)
         self.c = connection.Connection()
@@ -101,6 +106,10 @@ class Ui_RegistraceZam(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def regAkce(self):
+        '''
+        metoda pro registraci pro tlacitrko registrovat a vytvotreni uzivatele
+        :return: vlozeni uzivatele do db
+        '''
         try:
             self.chybHlaska.setText('')
             c = connection.Connection()
@@ -112,6 +121,11 @@ class Ui_RegistraceZam(object):
 
 
     def retranslateUi(self, MainWindow):
+        '''
+        metoda pro nastaveni textu v okne registrace
+        :param MainWindow: objekt
+        :return: nastaveni textu
+        '''
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Registrace AS"))
         self.label_3.setText(_translate("MainWindow", "heslo"))

@@ -8,6 +8,11 @@ from src.usApp import registrace
 
 class Ui_RegistrForm(object):
     def setupUi(self, Form):
+        '''
+        metoda pro vytvoreni okna registrace
+        :param Form: form
+        :return: okno registrace
+        '''
         Form.setObjectName("Form")
         Form.resize(860, 440)
         self.gridLayout = QtWidgets.QGridLayout(Form)
@@ -100,6 +105,11 @@ class Ui_RegistrForm(object):
         QtCore.QMetaObject.connectSlotsByName(Form)
 
     def registrBtnAkce(self, Form):
+        '''
+        metoda pro spusteni akce pro registraci uzivatele
+        :param Form: form
+        :return: vlozeni uzivatele do db
+        '''
         spravne = False
         try:
             if self.passwd.text() != self.pswdPotvrzeni.text():
@@ -123,10 +133,15 @@ class Ui_RegistrForm(object):
             dlg.setText("Ucet je uspesne zaregistrovany")
             button = dlg.exec()
             if button == QMessageBox.StandardButton.Ok:
-                print("ucet vytvoren")
+                pass
             Form.close()
 
     def retranslateUi(self, Form):
+        '''
+        metoda pro nastaveni textu v okne registrace
+        :param Form: form
+        :return: text okna
+        '''
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("registrace", "registrace"))
         self.label_2.setText(_translate("Form", "Registrace"))
