@@ -2,5 +2,5 @@
 ## Radek Koblic
 ### skolni projekt SPSE Jecna
 
-bla bla
+bla bla 
 
