@@ -46,7 +46,7 @@ class Ui_JedAutoserII:
         :return: nastaveni textu
         '''
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "Autoservis"))
         self.lAutoservis.setText(_translate("Form", "Autoservis"))
         self.lOtevrenoZavreno.setText(_translate("Form", "Otevreno"))
         self.label_7.setText(_translate("Form", "Otevírací doba"))

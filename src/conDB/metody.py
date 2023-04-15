@@ -436,3 +436,21 @@ def getZamJmeno(con, id):
     except Exception as e:
         raise ProblemDB('Error DB')
 
+def getOdpovediJe(id):
+    '''
+    metoda na zjisteni cetnosti odpovedi
+    :param id: id
+    :return: je nebo neni odpoved v db
+    '''
+    c = connection.Connection()
+    con = c.con()
+    cursor = con.cursor()
+    sql = f'select obj_id from odpoved where obj_id = %s;'
+    val = [id]
+    cursor.execute(sql, val)
+    myresult = cursor.fetchall()
+    cursor.close()
+    if len(myresult) == 0:
+        return True
+    else:
+        return False

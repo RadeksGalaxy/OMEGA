@@ -191,8 +191,9 @@ class Ui_MainZamWin(object):
         je = False
         for i in self.obj:
             if i[0] == self.spinId.value():
-                je = True
-                ob = i
+                if metody.getOdpovediJe(i[0]):
+                    je = True
+                    ob = i
         if je:
             try:
                 self.chybHlaska.setText('')
@@ -205,7 +206,7 @@ class Ui_MainZamWin(object):
             except Exception as e:
                 self.chybHlaska.setText(str(e))
         else:
-            self.chybHlaska.setText('objednavka neni v seznamu')
+            self.chybHlaska.setText('objednavka neni v seznamu nebo je již uzavřenar')
 
     def getCombo(self):
         '''
