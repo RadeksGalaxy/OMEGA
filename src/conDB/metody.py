@@ -9,27 +9,10 @@ class ProblemDB(Exception):
 soubor pro metody pro propojeni s databazi s pomocnymi objekty
 metody jsou pojmenovane podle toho co se od nich ceka
 '''
-typ = {
-    1: 'servis',
-    2: 'bouračka',
-    3: 'oprava'
-}
-stav = {
-    1: '✅',
-    2: '❌'
-}
-delka = {
-    0: '1H',
-    1: '2H',
-    2: '3H',
-    3: 'Cely den'
-}
-odpoved = {
-    None: '⏳',
-    1: '✅',
-    2: '❌'
-}
-
+typ = {1: 'servis',2: 'bouračka',3: 'oprava'}
+stav = {1: '✅',2: '❌'}
+delka = {0: '1H',1: '2H',2: '3H',3: 'Cely den'}
+odpoved = {None: '⏳',1: '✅',2: '❌'}
 
 def nacteniAut():
     '''
@@ -427,7 +410,6 @@ def getZamJmeno(con, id):
         cursor.execute(sql, val)
         myresult = cursor.fetchall()
         cursor.close()
-
         lis = []
         for i in myresult:
             lis.append(list(i))
@@ -442,15 +424,18 @@ def getOdpovediJe(id):
     :param id: id
     :return: je nebo neni odpoved v db
     '''
-    c = connection.Connection()
-    con = c.con()
-    cursor = con.cursor()
-    sql = f'select obj_id from odpoved where obj_id = %s;'
-    val = [id]
-    cursor.execute(sql, val)
-    myresult = cursor.fetchall()
-    cursor.close()
-    if len(myresult) == 0:
-        return True
-    else:
-        return False
+    try:
+        c = connection.Connection()
+        con = c.con()
+        cursor = con.cursor()
+        sql = f'select obj_id from odpoved where obj_id = %s;'
+        val = [id]
+        cursor.execute(sql, val)
+        myresult = cursor.fetchall()
+        cursor.close()
+        if len(myresult) == 0:
+            return True
+        else:
+            return False
+    except Exception as e:
+        raise ProblemDB('Error DB')
