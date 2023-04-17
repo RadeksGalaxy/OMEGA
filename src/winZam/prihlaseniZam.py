@@ -6,11 +6,11 @@ from src.winZam import zamUI
 
 class Ui_PrihlaseniZam(object):
     def setupUi(self, MainWindow):
-        '''
+        """
         metooda pro nastaveni okna pro prihlaseni okna
         :param MainWindow: objekt
         :return: nastaveni okna
-        '''
+        """
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(910, 560)
         self.okno = MainWindow
@@ -90,10 +90,10 @@ class Ui_PrihlaseniZam(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def prihlasitSe(self):
-        '''
+        """
         metoda pro prihlaseni a pro tlacitko prihlaseni zamestnance
         :return: prihlaseni se do aplikace
-        '''
+        """
         try:
             prihlaseni.PrihlasZam.prihlasitSe(self.comboAutoservis.currentIndex() + 1, self.lineID.text(), self.lineHeslo.text())
             zamUI.zobrazHlavniMenu(self, metody.getIdAutoservisu(self.comboAutoservis.currentText(), self.con), metody.getGlobalIdAutoservisu(self.comboAutoservis.currentText(), self.con))
@@ -104,11 +104,11 @@ class Ui_PrihlaseniZam(object):
             pass
 
     def retranslateUi(self, MainWindow):
-        '''
+        """
         metoda pro nasteveni textu v okne
         :param MainWindow: objekt
         :return: nastaveni textu
-        '''
+        """
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Autoservis"))
         self.label_2.setText(_translate("MainWindow", "Autoservis"))
@@ -120,11 +120,11 @@ class Ui_PrihlaseniZam(object):
             self.comboAutoservis.setItemText(self.autoservisy.index(i), _translate("MainWindow", i))
 
 def zobrazPrilaseni(object=object):
-    '''
+    """
     metoda pro zobrazeni okna prihlseni
     :param object: objekt
     :return: zobrazeni okna
-    '''
+    """
     object.MainWindow = QtWidgets.QMainWindow()
     object.ui = Ui_PrihlaseniZam()
     object.ui.setupUi(object.MainWindow)

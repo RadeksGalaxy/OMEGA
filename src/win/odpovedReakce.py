@@ -5,12 +5,12 @@ import pandas as pd
 
 class Ui_OdpovedForm(object):
     def setupUi(self, Form, objID):
-        '''
+        """
         metoda pro nastaveni okna potvrzeni nebo zruseni objednavky
         :param Form: form
         :param objID: objednavka id
         :return: okno
-        '''
+        """
         Form.setObjectName("Form")
         Form.resize(768, 501)
         c = connection.Connection()
@@ -121,10 +121,10 @@ class Ui_OdpovedForm(object):
         c.commit()
 
     def zrusitAkce(self):
-        '''
+        """
         metoda na zruseni objednavky
         :return: nastavit v db
-        '''
+        """
         try:
             c = connection.Connection()
             con = c.con()
@@ -135,10 +135,10 @@ class Ui_OdpovedForm(object):
             self.chybHlaska.setText(str(e))
 
     def potvrditAkce(self):
-        '''
+        """
         metoda pro potvrzeni objednavky
         :return: potvrzeni db
-        '''
+        """
         try:
             c = connection.Connection()
             con = c.con()
@@ -150,11 +150,11 @@ class Ui_OdpovedForm(object):
 
 
     def retranslateUi(self, Form):
-        '''
+        """
         metoda na nastaveni zobrazeni objektu v okne
         :param Form: form
         :return: nastaveni textu
-        '''
+        """
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "AS"))
         self.label.setText(_translate("Form", "Servis"))
@@ -175,12 +175,12 @@ class Ui_OdpovedForm(object):
     "<p align=\"justify\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">"+self.objekt[3][0]+"</p></body></html>"))
 
 def zobrazOdpovedId(object: object, objID):
-    '''
+    """
     zobrazeni okna
     :param object: objekt
     :param objID: id objednavky
     :return: okno
-    '''
+    """
     object.Form = QtWidgets.QWidget()
     object.ui = Ui_OdpovedForm()
     object.ui.setupUi(object.Form , objID)

@@ -10,13 +10,13 @@ import datetime
 
 class Ui_AutoservisUs(Ui_PomocAutoservis, object):
     def setupUi(self, autoservisUs, email, autoser):
-        '''
+        """
         metoda na vytvoreni uvodniho okna autoservisu
         :param autoservisUs: autoservisu
         :param email: email prihlaseneho uzivatele
         :param autoser: list autoservisu
         :return: none
-        '''
+        """
         autoservisUs.setObjectName("autoservisUs")
         autoservisUs.resize(980, 680)
         self.autoservisUS = autoservisUs
@@ -269,13 +269,13 @@ class Ui_AutoservisUs(Ui_PomocAutoservis, object):
 
 
 def zobrazHlavniMenu(object : object, email, autoservisy):
-    '''
+    """
     metoda na zobrazeni okna autoservisu
     :param object: objekt
     :param email: email uzivatele
     :param autoservisy: list autoservisu
     :return: none
-    '''
+    """
     object.autoservisUs = QtWidgets.QMainWindow()
     object.ui = Ui_AutoservisUs()
     object.ui.setupUi(object.autoservisUs, email, autoservisy)

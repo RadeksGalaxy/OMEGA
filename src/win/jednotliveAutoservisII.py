@@ -3,10 +3,10 @@ from PyQt6 import QtCore
 
 class Ui_JedAutoserII:
     def hledatHledat(self):
-        '''
+        """
         metoda pro tlacitko hledat jednotlive sekce AS
         :return: zmena kontaktu
-        '''
+        """
         self.label_21.hide()
         self.lEmail.hide()
         self.label_17.hide()
@@ -40,11 +40,11 @@ class Ui_JedAutoserII:
         vyplnOtevreni(otevreni[7], self.lNedele)
 
     def retranslateUi(self, Form):
-        '''
+        """
         metoda pro vzhled formu pro autoservis
         :param Form: form
         :return: nastaveni textu
-        '''
+        """
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Autoservis"))
         self.lAutoservis.setText(_translate("Form", "Autoservis"))
@@ -116,25 +116,25 @@ class Ui_JedAutoserII:
             self.lOtevrenoZavreno.setText('Zavřeno')
 
 def vyplnKontakt(text, limg, ltext):
-    '''
+    """
     metoda na vyplneni kontaktu
     :param text: text vlozeni
     :param limg: cesta obrazku
     :param ltext: cesta objektu
     :return: nastaveni textu
-    '''
+    """
     if text != None:
         ltext.setText(text)
         limg.show()
         ltext.show()
 
 def vyplnOtevreni(listik, lable):
-    '''
+    """
     metoda pro zmenu otevreni doby
     :param listik: list otevreni
     :param lable: objekt
     :return: nastaveni textu otevreni
-    '''
+    """
     if listik[0] != None or listik[1] != None:
         cas = f"{listik[0]} - {listik[1]}"
     else:

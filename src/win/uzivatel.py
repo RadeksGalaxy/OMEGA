@@ -8,12 +8,12 @@ from vendor.rp import resource_path
 
 class Ui_Form(object):
     def setupUi(self, Form, email):
-        '''
+        """
         metoda pro nastaveni objektu v okna uzivatele
         :param Form: form
         :param email: email uzivatele
         :return: nastaveni okna
-        '''
+        """
         Form.setObjectName("Form")
         Form.resize(500, 400)
         self.form = Form
@@ -82,19 +82,19 @@ class Ui_Form(object):
         QtCore.QMetaObject.connectSlotsByName(Form)
 
     def btnAkce(self):
-        '''
+        """
         metoda pro zavreni okna
         :return: zavre se okno
-        '''
+        """
         self.form.close()
 
     def retranslateUi(self, Form, email):
-        '''
+        """
         metoda pro nastaveni textu v okne
         :param Form: form
         :param email: email uzivatele
         :return: nastaveni textu
-        '''
+        """
         _translate = QtCore.QCoreApplication.translate
         r = registrace.Registrace()
         listik = r.vyhledesjPodleEmailu(email)
@@ -114,12 +114,12 @@ class Ui_Form(object):
         self.email.setText(_translate("Form", str(listik[0][4])))
 
 def zobrazUzivatele(object : object, email):
-    '''
+    """
     metoda pro zobrazeni okna uzivatele
     :param object: object
     :param email: email uz
     :return: otevereni okna uz
-    '''
+    """
     object.Form = QtWidgets.QWidget()
     object.ui = Ui_Form()
     object.ui.setupUi(object.Form, email)

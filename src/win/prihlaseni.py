@@ -12,22 +12,22 @@ from vendor.rp import resource_path
 
 class Ui_Prihlaseni(object):
     def ui_rozhrani(self, email):
-        '''
+        """
         metoda na zobrazeni uvodniho okna po prihlaseni
         :param email: email uz
         :return: okno
-        '''
+        """
         self.autoservisUs = QtWidgets.QMainWindow()
         self.ui = autoservisUs.Ui_AutoservisUs()
         self.ui.setupUi(self.autoservisUs, email, [])
         self.autoservisUs.show()
 
     def setupUi(self, prihlaseni):
-        '''
+        """
         metoda pro nastaveni objektu okna
         :param prihlaseni: prihlaseni
         :return: okno
-        '''
+        """
         prihlaseni.setObjectName("prihlaseni")
         prihlaseni.resize(960, 540)
         self.prihl = prihlaseni
@@ -123,20 +123,20 @@ class Ui_Prihlaseni(object):
         QtCore.QMetaObject.connectSlotsByName(prihlaseni)
 
     def registrBtnAkce(self):
-        '''
+        """
         metoda na zobrazeni okna registrace
         :return: okno
-        '''
+        """
         self.Form = QtWidgets.QWidget()
         self.ui = registrForm.Ui_RegistrForm()
         self.ui.setupUi(self.Form)
         self.Form.show()
 
     def prihlasitBtnAkce(self):
-        '''
+        """
         metoda na spusteni akce pro tlacitko prihlaseni
         :return: prihlaseni
-        '''
+        """
         spravne = False
         try:
             email = self.usname.text()
@@ -160,14 +160,13 @@ class Ui_Prihlaseni(object):
             self.ui_rozhrani(self.usname.text())
 
     def retranslateUi(self, prihlaseni):
-        '''
+        """
         metoda pro zobrazeni textu v okne prihlaseni
         :param prihlaseni: prihlaseni
         :return: nastaveni textu v okne
-        '''
+        """
         _translate = QtCore.QCoreApplication.translate
         prihlaseni.setWindowTitle(_translate("autoservis", "autoservis"))
-        prihlaseni.setWindowIcon(QIcon('src/img/user.png'))
         self.label_2.setText(_translate("prihlaseni", "Přihlásit se"))
         self.label_4.setText(_translate("prihlaseni", "email"))
         self.label_5.setText(_translate("prihlaseni", "heslo"))
@@ -175,11 +174,11 @@ class Ui_Prihlaseni(object):
         self.registrBtn.setText(_translate("prihlaseni", "Registrace"))
 
 def zobrazUzivatele(object : object):
-    '''
+    """
     metoda pro otevreni okna
     :param object: objekt
     :return: otevreni okna
-    '''
+    """
     object.prihlaseni = QtWidgets.QMainWindow()
     object.ui = Ui_Prihlaseni()
     object.ui.setupUi(object.prihlaseni)

@@ -5,10 +5,10 @@ import datetime
 from vendor.rp import resource_path
 
 def aktualizaceSouboruOtevreni():
-    '''
+    """
     metoda pro aktualizovani oteviraci doby v souboru
     :return: zmena souboru
-    '''
+    """
     datum1 = f'{datetime.datetime.now().year}-{datetime.datetime.now().month}-{datetime.datetime.now().day} {datetime.datetime.now().hour}:{datetime.datetime.now().minute}:{datetime.datetime.now().second}'
     c = connection.Connection()
     con = c.con()

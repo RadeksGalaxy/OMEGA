@@ -4,7 +4,7 @@ from vendor.rp import resource_path
 
 class Autoservisy:
     def __init__(self, globalId=None,nazev=None,mesto=None,ulice=None,psc=None,prodejAut=None,servisAut=None,email=None,url=None,logo=None):
-        '''
+        """
         Vytvoreni objektu autoservis
         :param globalId: globalni ID pro CZ
         :param nazev: nazev AS
@@ -16,7 +16,7 @@ class Autoservisy:
         :param email: email na AS
         :param url: url adresa na web AS
         :param logo: url adresa loga AS
-        '''
+        """
         self.globalId = globalId
         self.nazev = nazev
         self.mesto = mesto
@@ -109,18 +109,18 @@ class Autoservisy:
         self._logo = value
 
     def toString(self):
-        '''
+        """
         pomocna metoda pro vypis atributu
         :return: vrati seznam atributu tridy
-        '''
+        """
         return f'{self.nazev}  adresa:{self.mesto} {self.ulice} {self.psc}  prodej:{self.prodejAut}  servis:{self.servisAut}'
 
     @staticmethod
     def importAutoservisy():
-        '''
+        """
         metoda pro import vsech autoservisu z dataset filu do DB
         :return: None
-        '''
+        """
         celkem = []
         with open(resource_path('src/datasets/czAutoservisySkoda.json'), 'r') as f:
             data = json.load(f)
@@ -152,10 +152,10 @@ class Autoservisy:
 
     @staticmethod
     def vypisAutoservis():
-        '''
+        """
         metoda pro pomocny vypis autoservisu z DB
         :return: seznam autoservisu
-        '''
+        """
         c = connection.Connection()
         con = c.con()
         cursor = con.cursor()

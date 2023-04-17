@@ -8,12 +8,12 @@ from vendor.tableModel import TableModel
 
 class Ui_Kalendar(object):
     def setupUi(self, Form, globalID):
-        '''
+        """
         metoda pro nastaveni okna kalendare zamestnancum
         :param Form: form
         :param globalID: globalnni id autoservisu
         :return: nastaveni okna
-        '''
+        """
         Form.setObjectName("Form")
         Form.resize(730, 535)
         self.globalId = globalID
@@ -82,10 +82,10 @@ class Ui_Kalendar(object):
         QtCore.QMetaObject.connectSlotsByName(Form)
 
     def obnovaAkce(self):
-        '''
+        """
         metoda na obnovu tebulky objednavek
         :return: obnova
-        '''
+        """
         try:
             datum = datetime.date(self.kalendar.selectedDate().year(), self.kalendar.selectedDate().month(), self.kalendar.selectedDate().day())
             c = connection.Connection()
@@ -107,23 +107,23 @@ class Ui_Kalendar(object):
 
 
     def retranslateUi(self, Form):
-        '''
+        """
         metoda na nastaveni textu okna
         :param Form: form
         :return: nastaveni textu
-        '''
+        """
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Kalendář"))
         self.label.setText(_translate("Form", "Kalendář"))
         self.btnHledat.setText(_translate("Form", "Obnovit"))
 
 def zobrazKalendar(object:object, globalID):
-    '''
+    """
     metoda pro zobrazeni okna kalendare
     :param object: objekt
     :param globalID: globalni id autoservisu
     :return: zobrazeni okna
-    '''
+    """
     object.Form = QtWidgets.QWidget()
     object.ui = Ui_Kalendar()
     object.ui.setupUi(object.Form, globalID)

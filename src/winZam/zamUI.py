@@ -7,13 +7,13 @@ from vendor.rp import resource_path
 
 class Ui_MainZamWin(object):
     def setupUi(self, MainWindow, auser, globalID):
-        '''
+        """
         metoda pro nastaveni uvodniho okna pro zamestnance
         :param MainWindow: objekt
         :param auser: autoservis
         :param globalID: global id autoservisu
         :return: nastaveni okna
-        '''
+        """
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1020, 725)
         c = connection.Connection()
@@ -165,18 +165,18 @@ class Ui_MainZamWin(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def odhlasitSe(self):
-        '''
+        """
         metoda pro odhlaseni se z aplikace
         :return: zmena okna na prihlasovaci
-        '''
+        """
         prihlaseniZam.zobrazPrilaseni(self)
         self.okno.close()
 
     def kalenndarAkce(self):
-        '''
+        """
         metoda pro zobrazeni okna kalendare
         :return: zobrazeni kalendare
-        '''
+        """
         try:
             self.chybHlaska.setText('')
             kalendar.zobrazKalendar(self, self.globalId)
@@ -184,10 +184,10 @@ class Ui_MainZamWin(object):
             self.chybHlaska.setText(str(e))
 
     def hledatAkce(self):
-        '''
+        """
         metoda pro hledani objednavky v tabulce objednavek
         :return: otevreni okna
-        '''
+        """
         je = False
         for i in self.obj:
             if i[0] == self.spinId.value():
@@ -209,10 +209,10 @@ class Ui_MainZamWin(object):
             self.chybHlaska.setText('objednavka neni v seznamu nebo je již uzavřenar')
 
     def getCombo(self):
-        '''
+        """
         metoda pro filtrovani tabulky
         :return: obnova tabulky
-        '''
+        """
         if self.comboMode.currentText() == '':
             model = None
         else:
@@ -251,10 +251,10 @@ class Ui_MainZamWin(object):
         self.obj = lis
 
     def obnovit(self):
-        '''
+        """
         metoda pro filtrovani tabulky
         :return: obnova tabulky
-        '''
+        """
         if len(self.obj) != 0:
             for i in range(0,len(self.obj[0])):
                 self.tabulka.setColumnWidth(int(i),self.colmnS[i])
@@ -270,11 +270,11 @@ class Ui_MainZamWin(object):
             self.tabulka.setRowCount(0)
 
     def retranslateUi(self, MainWindow):
-        '''
+        """
         metoda pro nastaveni textu v okne
         :param MainWindow:  objekt
         :return: nastaveni ttextu
-        '''
+        """
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Autoservis"))
         self.label_3.setText(_translate("MainWindow", "Otevřít ID"))
@@ -299,13 +299,13 @@ class Ui_MainZamWin(object):
             pass
 
 def zobrazHlavniMenu(object=object, auservis=None, globalID=None):
-    '''
+    """
     metoda pro zobrazeni okna
     :param object: objekt
     :param auservis: autoservis list
     :param globalID: global id autoservisu
     :return: zobrazeni okna
-    '''
+    """
     object.MainWindow = QtWidgets.QMainWindow()
     object.ui = Ui_MainZamWin()
     object.ui.setupUi(object.MainWindow, auservis, globalID)

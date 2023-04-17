@@ -6,7 +6,7 @@ import datetime
 
 class AutoservisPopis (autoservis.Autoservisy):
     def __init__(self, globalId=None, nazev=None,mesto=None,ulice=None,psc=None,prodejAut=None, servisAut=None,email=None,url=None,logo=None, seznamTypu=list, seznamOtevreni=dict,seznamKontaktu=dict, stav=None):
-        '''
+        """
         rozsirujici trida pro autoservisu, ktera je pouzita pro prehled autoservisu pro uzivatele
         :param globalId: globalni ID pro CZ
         :param nazev: nazev AS
@@ -22,7 +22,7 @@ class AutoservisPopis (autoservis.Autoservisy):
         :param seznamOtevreni: seznam oteviraci doby dle pobocky
         :param seznamKontaktu: seznam kontaktu pro urcite pobocky
         :param stav: stav zda v ten moment je AS otevren nebo ma zavreno
-        '''
+        """
         super().__init__(globalId,nazev,mesto,ulice,psc,prodejAut,servisAut,email,url,logo)
         self.seznamTypu = seznamTypu
         self.seznamOtevreni = seznamOtevreni
@@ -62,11 +62,11 @@ class AutoservisPopis (autoservis.Autoservisy):
         self._stav = value
 
     def pridejTyp(self, value):
-        '''
+        """
         metoda pro pridani typu AS
         :param value: typ AS
         :return: pridani do listu
-        '''
+        """
         a = self.seznamTypu
         b = []
         if type(a) == list:
@@ -78,11 +78,11 @@ class AutoservisPopis (autoservis.Autoservisy):
 
     @staticmethod
     def vytvorPrehled(autoservis):
-        '''
+        """
         metoda pro vytvoreni prehledu autoservisu metodou vytazeni dat ze souboru a vlozeni do listu
         :param autoservis: global id autoservisu
         :return: list vytazeni dat ze souboru
-        '''
+        """
         a = AutoservisPopis()
         c = connection.Connection()
         con = c.con()

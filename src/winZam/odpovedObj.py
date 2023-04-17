@@ -9,13 +9,13 @@ from src.zamApp import odpoved
 
 class Ui_OdpovedForm(object):
     def setupUi(self, Form, ob, globalID):
-        '''
+        """
         metoda pro nastaveni okna odpovedi
         :param Form: form
         :param ob: ojednavka
         :param globalID: globalni id autoservisu
         :return: nastaveni okna
-        '''
+        """
         Form.setObjectName("Form")
         Form.resize(860, 570)
         self.form = Form
@@ -190,10 +190,10 @@ class Ui_OdpovedForm(object):
 
 
     def odeslat(self):
-        '''
+        """
         metoda pro tlacitko a opdeslani odpovedi uzivateli
         :return: odeslaniodpovedi do db
-        '''
+        """
         cas = datetime.timedelta(hours=self.casEdit.time().hour(), minutes=self.casEdit.time().minute())
         datum = datetime.datetime(self.datumEdit.date().year(), self.datumEdit.date().month(), self.datumEdit.date().day())
         try:
@@ -206,11 +206,11 @@ class Ui_OdpovedForm(object):
 
 
     def retranslateUi(self, Form):
-        '''
+        """
         metoda pro nastaveni textu v okne
         :param Form: form
         :return: nastaveni textu v okne
-        '''
+        """
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Odpoved"))
         self.label_3.setText(_translate("Form", "Čas OD"))
