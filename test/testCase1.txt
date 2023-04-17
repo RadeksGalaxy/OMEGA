@@ -1,0 +1,15 @@
+        Test Case 1
+
+Radek Koblic C4a
+16.4.2023
+priorita: Velka
+titulek: Vytvoření uživatele
+popis: Vytvoření a vložení uživatele do DB a následné přihlášení
+
+1.  Spustit okno pro uživatele
+2.  Kliknout na tlačítko registrace
+3.  Vyplnit formulář podle pokynů
+4.  Kliknout tlačítko "Registrovat se" - okenko potvrdit
+5.  Přihlásit se pod vytvořený účet
+
+        PASS Probehlo

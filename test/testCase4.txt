@@ -1,0 +1,15 @@
+        Test Case 1
+
+Radek Koblic C4a
+16.4.2023
+priorita: Velka
+titulek: Potvrzení/Zrušení servisu
+popis: Potvrdit nebo zrušit dané objednávce zda zákazník přijede nebo ne
+
+1.  Spustit okno pro uživatele
+2.  Přejít do sekce Odpovědi z vytvoření objednávky
+3.  Pro jistotu kliknout na tlačítko refresh pro obnovu dat
+4.  Vybrat objednávku podle prvního sloupce ID ve které je emoji ⏳ a kliknout na tlačítko Vyhledat
+5.  Zkontrolovat/přečíst si údaje a kliknout na tlačítko potvrdit nebo zrušit
+
+        PASS Probehlo
