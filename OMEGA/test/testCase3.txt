@@ -1,0 +1,14 @@
+        Test Case 1
+
+Radek Koblic C4a
+16.4.2023
+priorita: Velka
+titulek: Vytvoření odpovědi pro uživatele
+popis: Vytvoření odpovědi kterou uživatel uvití po přihlášení do aplikace ve sve sekci
+
+1.  Spustit okno pro zam a přihlásitse
+2.  vyhledat si objednávku a napsat do formuláře její id z prvního sloupce
+3.  kliknout na tlačítko hledat
+4.  Vyplnit vše potřebné a odpovědět
+
+        PASS Probehlo

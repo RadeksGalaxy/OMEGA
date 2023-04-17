@@ -1,0 +1,14 @@
+        Test Case 2
+
+Radek Koblic C4a
+16.4.2023
+priorita: Velka
+titulek: Vytvoření objednávky
+popis: vyplnění formuláře objednavky a odeslání autoservisu
+
+1.  Vyplnění formuláře
+2.  Splnit vše požadované inputy
+3.  Odeslat objednávku a potvrdit
+4.  Objednávka by se měla zobrazit v listu autoservisu
+
+        PASS Probehlo

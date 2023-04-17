@@ -1,0 +1,14 @@
+        Test Case 1
+
+Radek Koblic C4a
+16.4.2023
+priorita: Velka
+titulek: Vytvoření učtu zaměstnance
+popis: Vytvoření a vložení učtu zam do DB a následné přihlášení
+
+1.  Spustit okno pro vytvoření zaměstnaneckého pčtu
+2.  Vyplnit formulář podle pokynů
+3.  Kliknout tlačítko "Registrovat se"
+4.  Přihlásit se pod vytvořený účet po restartu aplikace pro zam
+
+        PASS Probehlo
