@@ -105,3 +105,9 @@
 ![img.png](doc/regZam.png)
 - toto okno je vytvořeno pro vutvření účtu zaměstnanci pro jednotlivý autoservis
 - po vyplnění formuláře se může vytvořit nový účet pro autoservis a dále se přez něj přihlašovat do aplikace pro zaměstnance
+
+
+
+### Licence Creative Commons
+#### licence pro cely projekt
+![img.png](doc/licence.png)
